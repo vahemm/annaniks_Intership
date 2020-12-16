@@ -8,7 +8,7 @@ router.get("/all", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const student = await Students.where("id", req.params.id).fetch();
+  const student = await Students.where("idstudent", req.params.id).fetch();
   res.json(student);
   console.log("The request has been processed");
 });
@@ -26,7 +26,7 @@ router.post("/student", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const student = await Students.where("id", req.params.id).save(
+  const student = await Students.where("idstudent", req.params.id).save(
     {
       ...req.body,
     },
@@ -37,7 +37,7 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const student = await Students.where("id", req.params.id).destroy();
+  const student = await Students.where("idstudent", req.params.id).destroy();
   res.json(student);
   console.log("The request has been processed");
 });

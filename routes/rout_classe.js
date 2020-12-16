@@ -11,7 +11,7 @@ router.get("/all", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const classe = await Classes.where("id", req.params.id).fetch();
+  const classe = await Classes.where("idclasse", req.params.id).fetch();
 
   res.json(classe);
   console.log("The request has been processed");
@@ -29,7 +29,7 @@ router.post("/classe", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const classe = await Classes.where("id", req.params.id).save(
+  const classe = await Classes.where("idclasse", req.params.id).save(
     {
       ...req.body,
     },
@@ -40,8 +40,16 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const classe = await Classes.where("id", req.params.id).destroy();
+  const classe = await Classes.where("idclasse", req.params.id).destroy();
   res.json(classe);
+  console.log("The request has been processed");
+});
+
+router.get("/allstudents/:id", async (req, res) => {
+  const allStudents = await Classes.where("idclasse", req.params.id).fetch({
+    withRelated: ["student"],
+  });
+  res.json(allStudents.related("student"));
   console.log("The request has been processed");
 });
 
